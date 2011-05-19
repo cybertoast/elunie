@@ -20,7 +20,24 @@ class Elunie
         # load configuration
         @CONFIG = YAML.load_file(configFile)
     end
-     
+
+    def debug(data)
+        if !@CONFIG['data']['debug']
+            return
+        end
+        puts "Rule is: .."
+        PP.pp(@RuleSet)
+        puts
+    end
+    
+    def showTip
+        puts "The secret key:"
+        print "IF ... "; PP.pp(@RuleSet['if'])
+        print "CHOOSE ... "; PP.pp(@RuleSet['choose'])
+        print "ELSE ... "; PP.pp(@RuleSet['else'])
+        puts
+    end
+    
     def matchCurrentRule(previous, current)
         rule = @RuleSet
         # TODO: this should be a method-missing
@@ -66,10 +83,8 @@ class Elunie
                 previous = current
             end
         end
-        
-        puts "Rule is: .."
-        PP.pp(@RuleSet)
-        puts
+
+        debug(@RuleSet)
 
         puts "The first " + @CONFIG['data']['numberOfExamples'].to_s + " moves are:"
         examples.each do |example|
@@ -99,7 +114,15 @@ class Elunie
     end
     
     def menu
+        puts "--------------------------------------------------"
         puts "Instructions for this game are as follows: "
+        puts "h/? : help"
+        puts "q/x : exit"
+        puts "tip : get secret tips"
+        puts
+        puts "size color figure : to try your luck at the game"
+        puts "That's all for now"
+        puts "--------------------------------------------------"
     end
     
     def promptUser()        
@@ -112,6 +135,8 @@ class Elunie
                 menu
             when /^[xq]$/i
                 exit 0
+            when /^tip$/
+                showTip
             else
                 # ans needs to be split into size, color, shape
                 size, color, figure = ans.split
@@ -128,7 +153,3 @@ class Elunie
         
     end
 end 
-     
-game = Elunie.new(configFile="elunie.yaml")
-game.play()
-puts game.CONFIG['rules']

@@ -6,6 +6,7 @@ prompts:
   incorrect: "Incorrect!"
   
 data:
+  debug: false
   seriesCount: 3
   numberOfExamples: 3
   
