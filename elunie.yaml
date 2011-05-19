@@ -88,10 +88,20 @@ rules:
       key:  figure
       value: circle
     choose:
+      key: color
+      value: blue
+    else:
+      key: color 
+      value: yellow
+
+  8:
+    if:
+      key:  figure
+      value: circle
+    choose:
       key: size
       value: small
     else:
       key: size 
       value: big
-
 
