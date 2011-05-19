@@ -1,0 +1,96 @@
+prompts:
+  welcome: "Welcome to Elunie\n\n"
+  example: "The filst #{numberOfExamples} moves are:"
+  start: "Enter the next move (size color figure):\n"
+  correct: "Correct!"
+  incorrect: "Incorrect!"
+  
+data:
+  seriesCount: 3
+  numberOfExamples: 3
+  
+  figures: [circle, lozenge]
+  sizes: [small, big]
+  colors: [yellow, blue]
+    
+rules:
+  1:
+    if:
+      key:  figure
+      value: lozenge
+    choose:
+      key: color
+      value: blue
+    else:
+      key: size 
+      value: same
+
+  2:
+    if:
+      key:  color
+      value: yellow
+    choose:
+      key: size
+      value: big
+    else:
+      key: size 
+      value: small
+  
+  3:
+    if:
+      key:  color
+      value: yellow
+    choose:
+      key: figure
+      value: circle
+    else:
+      key: figure
+      value: lozenge
+      
+  4:
+    if:
+      key:  color
+      value: blue
+    choose:
+      key: figure
+      value: circle
+    else:
+      key: figure
+      value: lozenge
+      
+  5:
+    # if the last figure is blue, choose a big figure, if not choose a different type
+    # ?? What is a "different type?" Let's assume it means figure
+    if:
+      key:  color
+      value: blue
+    choose:
+      key: size
+      value: big
+    else:
+      key: figure 
+      value: different
+
+  6:
+    if:
+      key:  color
+      value: blue
+    choose:
+      key: size
+      value: big
+    else:
+      key: figure 
+      value: circle
+
+  7:
+    if:
+      key:  figure
+      value: circle
+    choose:
+      key: size
+      value: small
+    else:
+      key: size 
+      value: big
+
+
