@@ -1,0 +1,8 @@
+Pre-requisites
+--------------
+Ensure that at least the yaml (elunie.yaml) file exists.
+
+Instructions
+------------
+
+ruby elunie.rb
