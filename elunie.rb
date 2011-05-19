@@ -126,6 +126,7 @@ class Elunie
     end
     
     def promptUser()        
+        correctCount = 0
         until false do
             puts @CONFIG['prompts']['start']
             ans = gets.chomp
@@ -144,8 +145,17 @@ class Elunie
                 if matchCurrentRule(@Previous, current)
                     puts @CONFIG['prompts']['correct']
                     @Previous = current
+                    correctCount += 1
+                    if @CONFIG['data']['movesToWin'] == correctCount
+                        puts @CONFIG['prompts']['win']
+                        break
+                    end
                 else
                     puts @CONFIG['prompts']['incorrect']
+                    if @CONFIG['data']['loseOnIncorrect']
+                        puts @CONFIG['prompts']['lose']
+                        break
+                    end
                 end
 
             end

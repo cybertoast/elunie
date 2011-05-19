@@ -4,11 +4,15 @@ prompts:
   start: "Enter the next move (size color figure):\n"
   correct: "Correct!"
   incorrect: "Incorrect!"
+  lose: "You Lose!"
+  win: "You Win!"
   
 data:
   debug: false
-  seriesCount: 3
+  
+  movesToWin: 5
   numberOfExamples: 3
+  loseOnIncorrect: true
   
   figures: [circle, lozenge]
   sizes: [small, big]
